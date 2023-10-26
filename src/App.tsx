@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Home, Login, Register } from "./components/utils/helper";
+import { Home, Login, Page404, Register } from "./components/utils/helper";
 
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
         <Route index path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Home />} />
         <Route path="/register" element={<Register />} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </BrowserRouter>
   );

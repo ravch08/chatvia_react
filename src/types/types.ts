@@ -11,3 +11,8 @@ export type LoginRegisterProps = {
 export type Wrapperprops = {
   children: ReactNode;
 };
+
+export type FormDataProps = {
+  email: string;
+  password: string;
+};

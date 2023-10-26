@@ -1,7 +1,15 @@
-import { LoginRegisterProps } from "../../types/types";
+import { useForm } from "react-hook-form";
+import { FormDataProps, LoginRegisterProps } from "../../types/types";
 import { ButtonSubmit } from "../utils/helper";
 
 const LoginForm = (props: LoginRegisterProps) => {
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const showRemember =
     props.remember === "false"
       ? "hidden"
@@ -12,9 +20,14 @@ const LoginForm = (props: LoginRegisterProps) => {
       ? "hidden"
       : "transition-colors ease-out hover:text-white";
 
+  const formSubmit = (data: FormDataProps) => {
+    console.log(data);
+    reset();
+  };
+
   return (
     <div className="w-[420px] rounded-md bg-gray-950 p-10">
-      <form>
+      <form onSubmit={handleSubmit(formSubmit)}>
         <label htmlFor="email" className="mb-2 flex gap-2 text-sm text-gray-50">
           Email
         </label>
@@ -40,8 +53,19 @@ const LoginForm = (props: LoginRegisterProps) => {
             id="email"
             placeholder={props.emailPlaceholder}
             className="w-full rounded-sm border border-l-0 border-slate-600 bg-transparent p-2 text-sm text-white caret-white focus:outline-none"
+            {...register("email", {
+              required: {
+                value: true,
+                message: "Email is required!",
+              },
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: "Invalid email format!",
+              },
+            })}
           />
         </div>
+        <p className="mb-4 text-sm text-red-500">{errors.email?.message}</p>
         <div className="flex items-center justify-between text-sm text-gray-50">
           <label htmlFor="password" className="mb-2 flex gap-2">
             Password
@@ -50,6 +74,7 @@ const LoginForm = (props: LoginRegisterProps) => {
             Forgot Password?
           </a>
         </div>
+
         <div className="flex items-center">
           <figure className="border border-slate-600 p-2.5">
             <svg
@@ -72,13 +97,27 @@ const LoginForm = (props: LoginRegisterProps) => {
             id="password"
             placeholder={props.passwordPlaceholder}
             className="w-full rounded-sm border border-l-0 border-slate-600 bg-transparent p-2 text-sm text-white caret-white focus:outline-none"
+            {...register("password", {
+              required: {
+                value: true,
+                message: "Password is required!",
+              },
+              // pattern: {
+              //   // Minimum eight characters, at least one letter, one number, and one special character
+              //   value:
+              //     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
+              //   message:
+              //     "Password must contain eight characters, at least one letter, one number, and one special character",
+              // },
+            })}
           />
         </div>
+        <p className="my-4 text-sm text-red-500">{errors.password?.message}</p>
         <div className={showRemember}>
           <input
             type="checkbox"
             id="checkbox"
-            className="rounded-xs focus:bg-primary-400 h-4 w-4 border-none p-2"
+            className="rounded-xs h-4 w-4 border-none p-2 focus:bg-primary-400"
           />
           <span>Remember me</span>
         </div>

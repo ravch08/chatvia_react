@@ -1,10 +1,18 @@
-import { ChatBar, ChatBox, SidebarProfile } from "../utils/helper";
+import {
+  ChatBar,
+  ChatBox,
+  SidebarChats,
+  SidebarProfile,
+  SidebarSetting,
+} from "../utils/helper";
 
 const Home = () => {
   return (
     <div className="flex items-center">
       <ChatBar />
       <SidebarProfile />
+      <SidebarChats />
+      <SidebarSetting />
       <ChatBox />
     </div>
   );

@@ -7,5 +7,9 @@
 /* font-family: 'Public Sans', sans-serif; */
 
 .chatBar-link {
-  @apply rounded-md p-4 transition-colors ease-in-out hover:bg-slate-600;
+  @apply rounded-md fill-none stroke-slate-400 p-3 transition-colors ease-in-out hover:bg-slate-600 hover:stroke-white;
+}
+
+.active {
+  @apply bg-slate-800 stroke-white;
 }

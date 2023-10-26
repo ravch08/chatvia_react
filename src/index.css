@@ -5,3 +5,7 @@
 @tailwind utilities;
 
 /* font-family: 'Public Sans', sans-serif; */
+
+.chatBar-link {
+  @apply rounded-md p-4 transition-colors ease-in-out hover:bg-slate-600;
+}

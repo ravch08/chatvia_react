@@ -15,6 +15,7 @@ const Login = () => {
 
       <LoginForm
         forgot="true"
+        upload="false"
         remember="true"
         btnType="Login"
         passwordPlaceholder="********"
@@ -25,7 +26,7 @@ const Login = () => {
         <p>Don't have an account ?</p>
         <Link
           to="/register"
-          className="text-primary-400 hover:text-primary-600 transition-colors ease-in-out"
+          className="text-primary-400 transition-colors ease-in-out hover:text-primary-600"
         >
           Signup now
         </Link>

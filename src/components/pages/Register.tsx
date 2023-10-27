@@ -15,6 +15,7 @@ const Register = () => {
 
       <LoginForm
         forgot="false"
+        upload="true"
         remember="false"
         btnType="Register"
         emailPlaceholder="Enter Email"

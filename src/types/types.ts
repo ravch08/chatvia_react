@@ -18,3 +18,9 @@ export type FormDataProps = {
   password: string;
   uploadFile: string;
 };
+
+export type SidebarHandlerProps = {
+  onClickChats: (bool: boolean) => void;
+  onClickProfile: (bool: boolean) => void;
+  onClickSettings: (bool: boolean) => void;
+};

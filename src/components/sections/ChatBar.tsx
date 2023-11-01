@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { SidebarHandlerProps } from "../../types/types";
+
 import { logoIcon } from "../utils/helper";
 
 const ChatBar = ({
@@ -7,8 +8,6 @@ const ChatBar = ({
   onClickProfile,
   onClickSettings,
 }: SidebarHandlerProps) => {
-  // const [isActive, setIsActive] = useState(false);
-
   const handleProfile = () => {
     onClickChats(false);
     onClickProfile(true);
@@ -28,7 +27,7 @@ const ChatBar = ({
   };
 
   return (
-    <div className="flex h-screen flex-col items-center justify-between bg-gray-200 px-4 py-4">
+    <div className="flex h-screen w-[80px] flex-col items-center justify-between bg-gray-200 px-4 py-4">
       <Link to="/dashboard">
         <img src={logoIcon} alt="logo" width="36" />
       </Link>

@@ -29,6 +29,10 @@ export { default as Profile } from "../layout/Profile.tsx";
 export { default as SearchUser } from "../layout/SearchUser.tsx";
 export { default as TextChat } from "../layout/TextChat.tsx";
 export { default as Wrapper } from "../layout/Wrapper.tsx";
+export { default as ChatBoxChats } from "../layout/chatbox/ChatBoxChats.tsx";
+export { default as ChatBoxFooter } from "../layout/chatbox/ChatBoxFooter.tsx";
+export { default as ChatBoxHeader } from "../layout/chatbox/ChatBoxHeader.tsx";
+export { default as ChatOptions } from "../layout/chatbox/ChatOptions.tsx";
 
 export { default as ChatBar } from "../sections/ChatBar.tsx";
 export { default as ChatBox } from "../sections/ChatBox.tsx";

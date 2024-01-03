@@ -39,3 +39,11 @@
 .optionsDropdown {
   @apply absolute right-2 top-[85px] flex w-36 flex-col rounded-sm bg-gray-800;
 }
+
+.form-control {
+  @apply mb-6;
+}
+
+.form-error {
+  @apply mt-4 text-sm text-red-700;
+}

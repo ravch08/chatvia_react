@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { LoginForm, Wrapper, logoLight } from "../utils/helper";
+import { RegisterForm, Wrapper, logoLight } from "../utils/helper";
 
 const Register = () => {
   return (
@@ -13,14 +13,7 @@ const Register = () => {
         <p className="text-gray-50">Get your Chatvia account now.</p>
       </div>
 
-      <LoginForm
-        forgot="false"
-        upload="true"
-        remember="false"
-        btnType="Register"
-        emailPlaceholder="Enter Email"
-        passwordPlaceholder="Enter Password"
-      />
+      <RegisterForm />
 
       <div className="mb-2 mt-8 flex items-center gap-2 text-gray-50">
         <p>Already have an account ?</p>

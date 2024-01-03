@@ -13,14 +13,7 @@ const Login = () => {
         <p className="text-gray-50">Sign in to continue to Chatvia.</p>
       </div>
 
-      <LoginForm
-        forgot="true"
-        upload="false"
-        remember="true"
-        btnType="Login"
-        passwordPlaceholder="********"
-        emailPlaceholder="admin@example.com"
-      />
+      <LoginForm />
 
       <div className="mb-2 mt-8 flex items-center gap-2 text-gray-50">
         <p>Don't have an account ?</p>

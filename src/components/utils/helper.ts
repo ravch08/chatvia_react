@@ -26,6 +26,7 @@ export { default as ImageChat } from "../layout/ImageChat.tsx";
 export { default as LoginForm } from "../layout/LoginForm.tsx";
 export { default as OnlineUser } from "../layout/OnlineUser.tsx";
 export { default as Profile } from "../layout/Profile.tsx";
+export { default as RegisterForm } from "../layout/RegisterForm.tsx";
 export { default as SearchUser } from "../layout/SearchUser.tsx";
 export { default as TextChat } from "../layout/TextChat.tsx";
 export { default as Wrapper } from "../layout/Wrapper.tsx";

@@ -47,3 +47,31 @@
 .form-error {
   @apply mt-4 text-sm text-red-700;
 }
+
+.chat-message {
+  @apply flex flex-row items-start justify-start gap-4;
+}
+
+.chat-message .chat-info {
+  @apply flex flex-col gap-2;
+}
+
+.chat-message .chat-content {
+  @apply flex flex-col gap-2;
+}
+
+.chat-message .chat-text {
+  @apply w-fit rounded-r-lg rounded-tl-lg bg-primary-400 px-5 py-3;
+}
+
+.owner {
+  @apply flex-row-reverse;
+}
+
+.owner .chat-content {
+  @apply items-end;
+}
+
+.owner .chat-text {
+  @apply rounded-l-lg rounded-br-none rounded-tr-lg;
+}

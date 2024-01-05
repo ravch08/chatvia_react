@@ -30,3 +30,10 @@ export type SidebarHandlerProps = {
   onClickProfile: (bool: boolean) => void;
   onClickSettings: (bool: boolean) => void;
 };
+
+export type ChatMessageProps = {
+  imgSrc: string;
+  owner: boolean;
+  message: string;
+  sampleImg?: string;
+};

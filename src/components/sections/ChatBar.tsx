@@ -34,7 +34,7 @@ const ChatBar = ({
         <img src={logoIcon} alt="logo" width="36" />
       </Link>
 
-      <div className="flex flex-col gap-2 ">
+      <div className="flex flex-col gap-4">
         <div className="chatBar-link active" onClick={handleProfile}>
           <svg
             strokeWidth={1.5}

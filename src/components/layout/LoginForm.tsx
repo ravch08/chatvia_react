@@ -4,14 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { string, z } from "zod";
-import { RegisterProps } from "./RegisterForm";
 
 import { auth } from "../../app/firebase";
 import { ButtonSubmit } from "../utils/helper";
+import { RegisterProps } from "./RegisterForm";
 
 const loginSchema = z.object({
   email: string().email({ message: "Invalid Email address!" }),
-  password: string(),
+  password: string().min(4, {
+    message: "Password must be atleast 4 characters long!",
+  }),
 });
 
 const LoginForm = () => {
@@ -83,7 +85,7 @@ const LoginForm = () => {
               })}
             />
           </div>
-          <p className="mb-4 text-sm text-red-500">{errors.email?.message}</p>
+          <p className="my-4 text-sm text-red-500">{errors.email?.message}</p>
         </div>
 
         <div className="form-control">

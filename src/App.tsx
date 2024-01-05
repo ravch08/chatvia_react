@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { Home, Login, Page404, Register } from "./components/utils/helper";
 
+import { Home, Login, Page404, Register } from "./components/utils/helper";
 import { AuthContext } from "./context/AuthContext";
 
 function App() {

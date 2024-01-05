@@ -24,8 +24,8 @@ const registerSchema = z
       message: "Username must be atleast 4 characters long.",
     }),
     email: string().email({ message: "Invalid Email address!" }),
-    password: string().min(4, { message: "invalid Password" }),
-    confirmPassword: string(),
+    password: string().min(4, { message: "Invalid Password" }),
+    confirmPassword: string().min(4, { message: "Invalid Password" }),
     // profilePic: z
     //   .any()
     //   .refine((files) => files?.length === 1, "Image is required.")
@@ -51,7 +51,6 @@ const registerSchema = z
 export type RegisterProps = z.infer<typeof registerSchema>;
 
 const RegisterForm = () => {
-  // const [err, setErr] = useState<boolean | null>(null);
   const navigate = useNavigate();
 
   const {
@@ -66,8 +65,6 @@ const RegisterForm = () => {
     const loginEmail = data.email;
     const loginPassword = data.password;
     const profilePic = data.profilePic;
-
-    console.log(data);
 
     try {
       const response = await createUserWithEmailAndPassword(
@@ -248,8 +245,8 @@ const RegisterForm = () => {
               {...register("confirmPassword")}
               className="w-full rounded-sm border border-l-0 border-slate-600 bg-transparent p-2 text-sm text-white caret-white focus:outline-none"
             />
-            <p className="form-error">{errors.confirmPassword?.message}</p>
           </div>
+          <p className="form-error">{errors.confirmPassword?.message}</p>
         </div>
         {/* Profile Picture */}
         <div className="relative mt-6">

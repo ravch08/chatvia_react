@@ -4,7 +4,7 @@ import { RegisterForm, Wrapper, logoLight } from "../utils/helper";
 const Register = () => {
   return (
     <Wrapper>
-      <Link to="/login">
+      <Link to="/">
         <img src={logoLight} alt="logo" width={150} className="mb-8" />
       </Link>
 

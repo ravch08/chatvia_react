@@ -4,7 +4,7 @@ import { LoginForm, Wrapper, logoLight } from "../utils/helper";
 const Login = () => {
   return (
     <Wrapper>
-      <Link to="/login">
+      <Link to="/">
         <img src={logoLight} alt="logo" width={150} className="mb-8" />
       </Link>
 

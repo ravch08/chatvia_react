@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { SidebarHandlerProps } from "../../types/types";
 
+import { signOut } from "firebase/auth";
+import { auth } from "../../app/firebase";
 import { logoIcon } from "../utils/helper";
 
 const ChatBar = ({
@@ -28,7 +30,7 @@ const ChatBar = ({
 
   return (
     <div className="flex h-screen w-[80px] flex-col items-center justify-between bg-gray-200 px-4 py-4">
-      <Link to="/dashboard">
+      <Link to="/">
         <img src={logoIcon} alt="logo" width="36" />
       </Link>
 
@@ -110,7 +112,10 @@ const ChatBar = ({
         </div>
       </div>
 
-      <Link to="#!" className="chatBar-link bg-primary-400">
+      <div
+        onClick={() => signOut(auth)}
+        className="chatBar-link bg-primary-400"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           stroke="white"
@@ -124,7 +129,7 @@ const ChatBar = ({
             d="M5.636 5.636a9 9 0 1012.728 0M12 3v9"
           />
         </svg>
-      </Link>
+      </div>
     </div>
   );
 };

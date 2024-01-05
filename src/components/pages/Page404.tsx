@@ -418,7 +418,7 @@ const Page404 = () => {
       </svg>
       <h2 className="-translate-y-8 font-sans text-9xl text-white">404</h2>
       <Link
-        to="/login"
+        to="/"
         className="mt-10 rounded-sm bg-primary-400 px-8 py-3 text-center text-white transition-colors ease-in-out hover:bg-primary-600"
       >
         Back To Home

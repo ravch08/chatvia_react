@@ -1,22 +1,42 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { string, z } from "zod";
 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { auth, storage } from "../../app/firebase";
+import { auth, db, storage } from "../../app/firebase";
 
 import { ButtonSubmit } from "../utils/helper";
 
+// const MAX_FILE_SIZE = 500000;
+// const ACCEPTED_IMAGE_TYPES = [
+//   "image/jpeg",
+//   "image/jpg",
+//   "image/png",
+//   "image/webp",
+// ];
+
 const registerSchema = z
   .object({
-    username: string().min(4, {
+    displayName: string().min(4, {
       message: "Username must be atleast 4 characters long.",
     }),
     email: string().email({ message: "Invalid Email address!" }),
     password: string().min(4, { message: "invalid Password" }),
     confirmPassword: string(),
-    // profilePic: string(),
+    // profilePic: z
+    //   .any()
+    //   .refine((files) => files?.length === 1, "Image is required.")
+    //   .refine(
+    //     (files) => files?.[0]?.size <= MAX_FILE_SIZE,
+    //     `Max file size is 5MB.`,
+    //   )
+    //   .refine(
+    //     (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
+    //     ".jpg, .jpeg, .png and .webp files are accepted.",
+    //   ),
   })
   .refine(
     (values) => {
@@ -31,6 +51,9 @@ const registerSchema = z
 export type RegisterProps = z.infer<typeof registerSchema>;
 
 const RegisterForm = () => {
+  // const [err, setErr] = useState<boolean | null>(null);
+  const navigate = useNavigate();
+
   const {
     register,
     reset,
@@ -39,7 +62,7 @@ const RegisterForm = () => {
   } = useForm<RegisterProps>({ resolver: zodResolver(registerSchema) });
 
   const submitHandler = async (data: RegisterProps) => {
-    const username = data.username;
+    const displayName = data.displayName;
     const loginEmail = data.email;
     const loginPassword = data.password;
     const profilePic = data.profilePic;
@@ -53,33 +76,34 @@ const RegisterForm = () => {
         loginPassword,
       );
 
-      const storageRef = ref(storage, "images/rivers.jpg");
-      const uploadTask = uploadBytesResumable(storageRef, file);
+      const date = new Date().getTime();
+      const storageRef = ref(storage, `${displayName + date}`);
 
-      // Register three observers:
-      // 1. 'state_changed' observer, called any time the state changes
-      // 2. Error observer, called on failure
-      // 3. Completion observer, called on successful completion
-      uploadTask.on(
-        (error) => {
-          // Handle unsuccessful uploads
-          console.log("Error has occured!");
-        },
-        () => {
-          // Handle successful uploads on complete
-          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+      await uploadBytesResumable(storageRef, profilePic).then(() => {
+        getDownloadURL(storageRef).then(async (downloadURL) => {
+          try {
             await updateProfile(response.user, {
-              displayName: username,
-              photoURL: profilePic,
+              displayName,
+              photoURL: downloadURL,
             });
-          });
-        },
-      );
+
+            await setDoc(doc(db, "users", response.user.uid), {
+              uid: response.user.uid,
+              displayName,
+              loginEmail,
+              photoURL: downloadURL,
+            });
+
+            await setDoc(doc(db, "userChat", response.user.uid), {});
+            navigate("/");
+          } catch (error) {
+            console.log(error);
+          }
+        });
+      });
     } catch (error) {
       console.log(error);
     }
-
     reset();
   };
 
@@ -89,10 +113,10 @@ const RegisterForm = () => {
         {/* // Username */}
         <div className="form-control">
           <label
-            htmlFor="username"
+            htmlFor="displayName"
             className="mb-2 flex gap-2 text-sm text-gray-50"
           >
-            Username
+            Display Name
           </label>
           <div className="flex items-center">
             <figure className="border border-slate-600 p-2.5">
@@ -112,15 +136,15 @@ const RegisterForm = () => {
               </svg>
             </figure>
             <input
-              id="username"
               autoFocus
               type="text"
-              placeholder="Enter Username"
-              {...register("username")}
+              id="displayName"
+              placeholder="Enter Display Name"
+              {...register("displayName")}
               className="w-full rounded-sm border border-l-0 border-slate-600 bg-transparent p-2 text-sm text-white caret-white focus:outline-none"
             />
           </div>
-          <p className="form-error">{errors.username?.message}</p>
+          <p className="form-error">{errors.displayName?.message}</p>
         </div>
         {/* // Email */}
         <div className="form-control">

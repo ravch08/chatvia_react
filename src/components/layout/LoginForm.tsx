@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form";
-import { ButtonSubmit } from "../utils/helper";
+import { useNavigate } from "react-router-dom";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { string, z } from "zod";
-// import { auth } from "../../app/firebase";
 import { RegisterProps } from "./RegisterForm";
+
+import { auth } from "../../app/firebase";
+import { ButtonSubmit } from "../utils/helper";
 
 const loginSchema = z.object({
   email: string().email({ message: "Invalid Email address!" }),
@@ -20,27 +22,20 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<RegisterProps>({ resolver: zodResolver(loginSchema) });
 
+  const navigate = useNavigate();
+
   const formSubmit = async (data: RegisterProps) => {
     const loginEmail = data.email;
     const loginPassword = data.password;
-    const profilePic = data.profilePic;
-    const displayName = loginEmail.slice(0, 4);
 
-    console.log(data);
-    console.log(displayName);
+    try {
+      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
 
-    // signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-    //   .then((userCredential) => {
-    //     // Signed in
-    //     const user = userCredential.user;
-    //     // ...
-    //   })
-    //   .catch((error) => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //   });
-
-    // reset();
+    reset();
   };
 
   return (

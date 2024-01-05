@@ -13,6 +13,12 @@ export type Wrapperprops = {
   children: ReactNode;
 };
 
+export type ChatItemProps = {
+  name: string;
+  imgSrc: string;
+  message: string;
+};
+
 export type FormDataProps = {
   email: string;
   password: string;
